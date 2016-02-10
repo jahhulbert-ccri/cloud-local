@@ -6,6 +6,8 @@ install:
   - tar xvf geomesa-tools.tar.gz
   - export GEOMESA_HOME="$(pwd)/geomesa-tools-1.2.0-SNAPSHOT"
   - $GEOMESA_HOME/bin/geomesa env
+  - source ./bin/config.sh
+  - env
 
 script: 
   - source ./bin/config.sh
