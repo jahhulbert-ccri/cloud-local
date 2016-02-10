@@ -1,0 +1,13 @@
+sudo: false
+
+install: 
+  - ./bin/cloud-local.sh init
+  - wget -O geomesa-tools.tar.gz 'https://repo.locationtech.org/service/local/artifact/maven/redirect?r=geomesa-snapshots&g=org.locationtech.geomesa&a=geomesa-tools&v=1.2.0-SNAPSHOT&e=tar.gz&c=bin'
+  - tar xvf geomesa-tools.tar.gz
+  - export GEOMESA_HOME="$(pwd)/geomesa-tools-1.2.0-SNAPSHOT"
+  - $GEOMESA_HOME/bin/geomesa env
+
+script: 
+  - source ./bin/config.sh
+  - $GEOMESA_HOME/bin/geomesa ingest -u root -p secret -c foobar -s example-csv -C example-csv $GEOMESA_HOME/examples/ingest/csv/example.csv
+
